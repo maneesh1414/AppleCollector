@@ -6,6 +6,9 @@ public class apple : MonoBehaviour {
 	public int count;
 	public int life;
 	public Text score;
+	private AudioSource coincollect;
+	public AudioClip collectcoin;
+	public AudioClip enemytouch;
 	public Text Health;
 	// Use this for initialization
 	void Start () {
@@ -32,14 +35,21 @@ public class apple : MonoBehaviour {
 			apples.gameObject.SetActive(false);
 			count++;
 			score.text = "Apples : " + count;
+			coincollect.PlayOneShot (collectcoin);
 		}
 
 		if (apples.gameObject.CompareTag ("Cat")) 
 		{
-			
+			coincollect.PlayOneShot (enemytouch);
 			life--;
 			Health.text = "Health : " + life;
 		}
 
+
+
+	}
+	void Awake ()
+	{
+		coincollect = GetComponent<AudioSource> ();
 	}
 }
